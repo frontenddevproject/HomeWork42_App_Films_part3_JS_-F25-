@@ -144,12 +144,20 @@ class App {
                   this.removeWatchListData(currentFilm.id);
                   isUsingAsWatchList && this.renderData(this.getWatchListData(), App.watchListOutput, true);
                   btn.textContent = "Add to WatchList";
-                  if (!isFilmAddedToWatchList) renderedFilms[i].classList.remove("watch-list-film");
-                  console.log(currentFilm)
+                  const buttonFromMain = App.output.querySelector(`#${btn.id}`);
+                  const buttonFromWatchList = App.watchListOutput.querySelector(`#${btn.id}`);
+
+                  if (buttonFromMain) buttonFromMain.textContent = "Add to WatchList";
+                  if (buttonFromWatchList) buttonFromWatchList.textContent = "Add to WatchList"
                } else {
                   this.addWatchListData(currentFilm);
                   if (!isFilmAddedToWatchList) renderedFilms[i].classList.add("watch-list-film");
-                  btn.textContent = "Delete from WatchList"
+                  btn.textContent = "Delete from WatchList";
+                  const buttonFromMain = App.output.querySelector(`#${btn.id}`);
+                  const buttonFromWatchList = App.watchListOutput.querySelector(`#${btn.id}`);
+
+                  if (buttonFromMain) buttonFromMain.textContent = "Delete from WatchList";
+                  if (buttonFromWatchList) buttonFromWatchList.textContent = "Delete from WatchList"
                }
 
                
@@ -163,8 +171,10 @@ class App {
       App.watchListOutput.style.display = "flex"
       const watchListData = this.getWatchListData();
       App.watchListButton.textContent = "Go to main page";
+
       App.inputFilm.value = "";
       App.searchBtn.style.display = "none"
+      
       this.renderData(watchListData, App.watchListOutput, true);
 
    }
